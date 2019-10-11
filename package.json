@@ -1,0 +1,14 @@
+{
+  "license": "MIT",
+  "name": "serverless-blueprint",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.10.7",
+    "prettier": "^1.17.1"
+  },
+  "workspaces": [
+    "packages/*",
+    "frontend"
+  ],
+  "scripts": {}
+}
