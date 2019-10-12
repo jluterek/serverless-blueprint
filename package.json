@@ -14,6 +14,8 @@
     "lint": "lerna exec yarn lint",
     "test": "lerna exec yarn test",
     "deploy:dev": "lerna run deploy --scope blueprint-gateway -- --stage dev && lerna run deploy --ignore 'blueprint-gateway' -- --stage dev",
-    "remove:dev": "lerna run remove --ignore 'blueprint-gateway' -- --stage dev && lerna run remove --scope 'blueprint-gateway' -- --stage dev"
+    "deploy:prod": "lerna run deploy --scope blueprint-gateway -- --stage prod && lerna run deploy --ignore 'blueprint-gateway' -- --stage prod",
+    "remove:dev": "lerna run remove --ignore 'blueprint-gateway' -- --stage dev && lerna run remove --scope 'blueprint-gateway' -- --stage dev",
+    "remove:prod": "lerna run remove --ignore 'blueprint-gateway' -- --stage prod && lerna run remove --scope 'blueprint-gateway' -- --stage prod"
   }
 }
