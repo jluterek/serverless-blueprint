@@ -1,4 +1,4 @@
-name: test
+name: deploy
 
 on: [push]
 
@@ -22,6 +22,7 @@ jobs:
           CI: true
   deploy:
     name: deploy
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -36,10 +37,15 @@ jobs:
         run: npm i -g lerna
         shell: bash
       - name: Echo Ref
-        run: echo $GITHUB_REF
+        run: echo "${GITHUB_REF:11}"
         shell: bash
-      - name: Deploy
-        run: npm run deploy:dev
+      - name: Deploy Branch
+        if: github.ref != 'refs/heads/master'
+        run: echo "${GITHUB_REF:11}"
+        shell: bash
+      - name: Deploy Master
+        if: github.ref == 'refs/heads/master'
+        run: npm run deploy:prod
         shell: bash
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

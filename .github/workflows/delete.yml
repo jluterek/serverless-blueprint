@@ -1,19 +1,31 @@
-name: deploy
+name: delete
 
-on: [push]
+on:
+  delete:
+    branches-ignore:
+      - master
 
 jobs:
-  build:
-    name: build
+  delete:
+    name: delete
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@master
       - name: Use Node.js 8.x
         uses: actions/setup-node@v1
         with:
           node-version: 8.x
-      - name: npm install
-        run: |
-          npm install
+      - name: Install Serverless
+        run: npm i -g serverless
+        shell: bash
+      - name: Install Lerna
+        run: npm i -g lerna
+        shell: bash
+      - name: Deploy Branch
+        if: github.ref != 'refs/heads/master'
+        run: lerna run remove --ignore 'blueprint-gateway' -- --stage "${GITHUB_REF:11}" && lerna run remove --scope 'blueprint-gateway' -- --stage "${GITHUB_REF:11}"
+        shell: bash
         env:
-          CI: true
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
