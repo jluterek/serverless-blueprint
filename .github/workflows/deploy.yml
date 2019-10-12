@@ -37,11 +37,11 @@ jobs:
         run: npm i -g lerna
         shell: bash
       - name: Echo Ref
-        run: echo "${GITHUB_REF:11}"
+        run: echo ${GITHUB_REF:11}
         shell: bash
       - name: Deploy Branch
         if: github.ref != 'refs/heads/master'
-        run: echo "${GITHUB_REF:11}"
+        run: echo ${GITHUB_REF:11}
         shell: bash
       - name: Deploy Master
         if: github.ref == 'refs/heads/master'
