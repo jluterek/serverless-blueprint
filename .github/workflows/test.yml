@@ -32,6 +32,12 @@ jobs:
       - name: Install Serverless
         run: npm i -g serverless
         shell: bash
+      - name: Install Lerna
+        run: npm i -g lerna
+        shell: bash
+      - name: Echo Ref
+        run: echo $GITHUB_REF
+        shell: bash
       - name: Deploy
         run: npm run deploy:dev
         shell: bash
