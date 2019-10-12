@@ -6,24 +6,15 @@
 
 This repository was used in conjunction with a conference session at [All Things Open](https://allthingsopen.org/). All Things Open is an amazing tech conference located in Raleigh, NC focused on open-source code, hardware, and community.
 
-TODO: SLIDESHOW IMAGE
-TODO: SLIDESHOW LINK
+[![preview](https://raw.githubusercontent.com/jluterek/serverless-blueprint/master/presentation/preview.jpg)](https://raw.githubusercontent.com/jluterek/serverless-blueprint/master/presentation/slides.pdf)
 
 ## About
 
-TODO: ARCHITECTURE DIAGRAM
+This application contains a Lerna monorepo. Within the repository there is a single shared API Gateway and three example services. All items are configured and deployed to AWS with Serverless.
 
-This application is structured as a monorepo which means all the different packages sits under the same GitHub repository.
+A CI/CD pipeline is configured using github actions. Each github branch deploys a new deployment stage for testing purposes. The stage will follow the same name as the git branch. Master will represent production and utilize the stage "prod".
 
-It makes it easier to have CI/CD and automate dependency management.
-
-For example, under `frontend` sits the React application which consumes the services under `services`.
-
-Since the endpoint urls for the services change between environments (dev/qa/prod) we need to setup the frontend app correctly.
-
-Since all of our code sits in the same repository, we can update the frontend app environment based on the services deployment with ease.
-
-This application uses `Auth0` for authentication, `Sendgrid` for sending emails, `CircleCI` for deployment and `AWS` as a cloud provider.
+With the exception of master/production deployments will be removed and deleted when a branch is deleted.
 
 ## Prerequisites
 
@@ -51,45 +42,34 @@ This application uses `Auth0` for authentication, `Sendgrid` for sending emails,
 
 This repository uses [lerna](https://lernajs.io/) and yarn workspaces to handle dependencies.
 
-The API Gateway sits under `apigateway/`.
+The API Gateway sits under `gateway/`.
 
-The Serverless services sit under `packages/`.
-
-Shared services code is under `packages/common/`.
+The Serverless services sit under `services/`.
 
 ## Setup
 
 Install Dependencies
 
 ```bash
-yarn install
+npm install
 ```
-
-CI/CD is setup for 3 different environments: `dev` (for local development), `qa` (for integration tests) and `prod` (production).
 
 ## Deployment
 
 Development environment
 
 ```bash
-yarn deploy:dev # deploys services
+npm deploy:dev # deploys services
 ```
 
-QA environment will be deployed automatically on each commit to master
-
-Production environment will be deployed automatically on each version tag push, for example the following will trigger a production deployment:
+Production environment
 
 ```bash
-git tag "v0.0.1"
-git push --tags
+npm deploy:dev # deploys services
 ```
 
 ## Run Tests
 
 ```bash
-yarn test
-```
-
-```bash
-yarn coverage
+npm test
 ```
