@@ -7,8 +7,13 @@
     "prettier": "^1.17.1"
   },
   "workspaces": [
-    "packages/*",
-    "frontend"
+    "services/*",
+    "gateway"
   ],
-  "scripts": {}
+  "scripts": {
+    "lint": "lerna exec yarn lint",
+    "test": "lerna exec yarn test",
+    "deploy:dev": "lerna run deploy --scope blueprint-gateway -- --stage dev && lerna run deploy --ignore 'blueprint-gateway' -- --stage dev",
+    "remove:dev": "lerna run remove --ignore 'blueprint-gateway' -- --stage dev && lerna run remove --scope 'blueprint-gateway' -- --stage dev"
+  }
 }

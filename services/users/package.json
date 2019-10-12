@@ -1,0 +1,16 @@
+{
+  "name": "blueprint-users",
+  "version": "1.0.0",
+  "description": "A sample serverless rest endpoint.",
+  "main": "handler.js",
+  "scripts": {
+    "lint": "echo \"Error: no linter specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "serverless deploy",
+    "remove": "serverless remove"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}

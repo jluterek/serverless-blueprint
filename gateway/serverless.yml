@@ -1,0 +1,32 @@
+service: shared-gateway
+
+custom:
+  defaultStage: dev
+  currentStage: ${opt:stage, self:custom.defaultStage}
+  defaultRegion: us-west-2
+  currentRegion: ${file(../config/config.${self:custom.currentStage}.json):region}
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${self:custom.currentStage}
+  region: ${self:custom.currentRegion}
+resources:
+  Resources:
+    SharedGW:
+      Type: AWS::ApiGateway::RestApi
+      Properties:
+        Name: SharedGW
+  Outputs:
+    apiGatewayRestApiId:
+      Value:
+        Ref: SharedGW
+      Export:
+        Name: SharedGW-restApiId
+    apiGatewayRestApiRootResourceId:
+      Value:
+        Fn::GetAtt:
+          - SharedGW
+          - RootResourceId
+      Export:
+        Name: SharedGW-rootResourceId

@@ -1,0 +1,24 @@
+service: blueprint-products
+
+custom:
+  defaultStage: dev
+  currentStage: ${opt:stage, self:custom.defaultStage}
+  currentRegion: ${file(../../config/config.${self:custom.currentStage}.json):region}
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${self:custom.currentStage}
+  region: ${self:custom.currentRegion}
+  apiGateway:
+    restApiId:
+      'Fn::ImportValue': SharedGW-restApiId
+    restApiRootResourceId:
+      'Fn::ImportValue': SharedGW-rootResourceId
+functions:
+  get-products:
+    handler: handler.getProducts
+    events:
+      - http:
+          path: products/list
+          method: get

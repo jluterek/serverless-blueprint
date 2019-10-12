@@ -1,4 +1,9 @@
 # package directories
 node_modules
+jspm_packages
 
+# Debug Logs
 lerna-debug.log
+
+# Serverless directories
+.serverless
