@@ -13,20 +13,20 @@ provider:
   region: ${self:custom.currentRegion}
 resources:
   Resources:
-    SharedGW:
+    BlueprintGW:
       Type: AWS::ApiGateway::RestApi
       Properties:
-        Name: SharedGW
+        Name: BlueprintGW
   Outputs:
     apiGatewayRestApiId:
       Value:
-        Ref: SharedGW
+        Ref: BlueprintGW
       Export:
-        Name: SharedGW-restApiId
+        Name: BlueprintGW-${self:custom.currentStage}-restApiId
     apiGatewayRestApiRootResourceId:
       Value:
         Fn::GetAtt:
-          - SharedGW
+          - BlueprintGW
           - RootResourceId
       Export:
-        Name: SharedGW-rootResourceId
+        Name: BlueprintGW-${self:custom.currentStage}-rootResourceId
