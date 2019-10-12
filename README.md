@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![Test Status](https://github.com/jluterek/serverless-blueprint/workflows/test/badge.svg)]
+![Test Status](https://github.com/jluterek/serverless-blueprint/workflows/test/badge.svg)
 
 This repository was used in conjunction with a conference session at [All Things Open](https://allthingsopen.org/). All Things Open is an amazing tech conference located in Raleigh, NC focused on open-source code, hardware, and community.
 
