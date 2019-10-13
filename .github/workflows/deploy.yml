@@ -43,6 +43,9 @@ jobs:
         if: github.ref != 'refs/heads/master'
         run: lerna run deploy --scope blueprint-gateway -- --stage ${GITHUB_REF:11} && lerna run deploy --ignore 'blueprint-gateway' -- --stage ${GITHUB_REF:11}
         shell: bash
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Deploy Master
         if: github.ref == 'refs/heads/master'
         run: npm run deploy:prod
