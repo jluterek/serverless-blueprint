@@ -41,7 +41,7 @@ jobs:
         shell: bash
       - name: Deploy Branch
         if: github.ref != 'refs/heads/master'
-        run: echo ${GITHUB_REF:11}
+        run: lerna run deploy --scope blueprint-gateway -- --stage ${GITHUB_REF:11} && lerna run deploy --ignore 'blueprint-gateway' -- --stage ${GITHUB_REF:11}
         shell: bash
       - name: Deploy Master
         if: github.ref == 'refs/heads/master'
