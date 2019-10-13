@@ -4,7 +4,7 @@ custom:
   defaultStage: dev
   currentStage: ${opt:stage, self:custom.defaultStage}
   defaultRegion: us-west-2
-  currentRegion: ${file(../config/config.${self:custom.currentStage}.json):region}
+  currentRegion: ${file(../config/config.${self:custom.currentStage}.json):region, defaultRegion}
 
 provider:
   name: aws
