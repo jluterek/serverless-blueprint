@@ -36,13 +36,13 @@ jobs:
       - name: Install Lerna
         run: npm i -g lerna
         shell: bash
-      - name: Echo Ref
-        run: echo "${GITHUB_REF:11}"
-        shell: bash
       - name: Deploy Branch
         if: github.ref != 'refs/heads/master'
-        run: echo "${GITHUB_REF:11}"
+        run: lerna run deploy --scope blueprint-gateway -- --stage ${GITHUB_REF:11} && lerna run deploy --ignore 'blueprint-gateway' -- --stage ${GITHUB_REF:11}
         shell: bash
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Deploy Master
         if: github.ref == 'refs/heads/master'
         run: npm run deploy:prod

@@ -3,7 +3,8 @@ service: blueprint-users
 custom:
   defaultStage: dev
   currentStage: ${opt:stage, self:custom.defaultStage}
-  currentRegion: ${file(../../config/config.${self:custom.currentStage}.json):region}
+  defaultRegion: us-west-2
+  currentRegion: ${file(../config/config.${self:custom.currentStage}.json):region, self:custom.defaultRegion}
 
 provider:
   name: aws
