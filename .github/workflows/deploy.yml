@@ -36,9 +36,6 @@ jobs:
       - name: Install Lerna
         run: npm i -g lerna
         shell: bash
-      - name: Echo Ref
-        run: echo ${GITHUB_REF:11}
-        shell: bash
       - name: Deploy Branch
         if: github.ref != 'refs/heads/master'
         run: lerna run deploy --scope blueprint-gateway -- --stage ${GITHUB_REF:11} && lerna run deploy --ignore 'blueprint-gateway' -- --stage ${GITHUB_REF:11}

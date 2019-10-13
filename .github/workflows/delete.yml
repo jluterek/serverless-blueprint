@@ -24,7 +24,7 @@ jobs:
         shell: bash
       - name: Deploy Branch
         if: github.ref != 'refs/heads/master'
-        run: lerna run remove --ignore 'blueprint-gateway' -- --stage "${GITHUB_REF:11}" && lerna run remove --scope 'blueprint-gateway' -- --stage "${GITHUB_REF:11}"
+        run: lerna run remove --ignore 'blueprint-gateway' -- --stage ${GITHUB_REF:11} && lerna run remove --scope 'blueprint-gateway' -- --stage ${GITHUB_REF:11}
         shell: bash
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
