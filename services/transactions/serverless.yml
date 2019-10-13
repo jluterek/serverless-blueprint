@@ -3,7 +3,7 @@ service: blueprint-transactions
 custom:
   defaultStage: dev
   currentStage: ${opt:stage, self:custom.defaultStage}
-  currentRegion: ${file(../config/config.${self:custom.currentStage}.json):region, defaultRegion}
+  currentRegion: ${file(../config/config.${self:custom.currentStage}.json):region, self:custom.defaultRegion}
 
 provider:
   name: aws
