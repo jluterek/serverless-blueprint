@@ -21,7 +21,7 @@ jobs:
       - name: Install Lerna
         run: npm i -g lerna
         shell: bash
-      - name: Deploy Branch
+      - name: Delete Branch Environment
         if: github.ref != 'refs/heads/master'
         run: lerna run remove --ignore 'blueprint-gateway' -- --stage ${GITHUB_REF:11} && lerna run remove --scope 'blueprint-gateway' -- --stage ${GITHUB_REF:11}
         shell: bash
